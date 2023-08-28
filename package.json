@@ -22,7 +22,7 @@
     "url": "https://github.com/fleye-me/nestjs-authorization/issues"
   },
   "private": false,
-  "license": "UNLICENSED",
+  "license": "GPL-3.0",
   "scripts": {
     "prebuild:package": "rimraf lib",
     "build": "nest build",
