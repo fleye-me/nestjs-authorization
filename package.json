@@ -1,9 +1,27 @@
 {
-  "name": "nestjs-auth",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
-  "private": true,
+  "name": "@fleye-me/nestjs-authorization",
+  "version": "0.1.0",
+  "description": "Custom authorization solution for NestJS",
+  "engines": {
+    "node": ">= 14"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fleye-me/nestjs-authorization.git"
+  },
+  "keywords": [
+    "nestjs",
+    "nest.js",
+    "nest",
+    "authorizer",
+    "authorization",
+    "permission",
+    "custom"
+  ],
+  "bugs": {
+    "url": "https://github.com/fleye-me/nestjs-authorization/issues"
+  },
+  "private": false,
   "license": "UNLICENSED",
   "scripts": {
     "prebuild:package": "rimraf lib",
