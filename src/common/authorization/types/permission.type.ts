@@ -4,7 +4,18 @@ export type PermissionDef = {
    */
   action: string;
   /**
-   * @param {string} description - Description, e.g. `can action resourcer`
+   * @param {string} description - Description of the action, e.g. `can create users`
    */
   description: string;
+};
+
+export type PermissionActionDef = {
+  [key: string]: PermissionDef;
+};
+
+/**
+ * @description e.g. { users: { create: ..., read: ..., ... }, other: {...}, ... }
+ */
+export type PermissionsListDef = {
+  [resource: string]: PermissionActionDef;
 };
