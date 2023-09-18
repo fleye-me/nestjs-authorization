@@ -1,6 +1,6 @@
 {
   "name": "@fleye-me/nestjs-authorization",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Custom authorization solution for NestJS",
   "engines": {
     "node": ">= 14"
