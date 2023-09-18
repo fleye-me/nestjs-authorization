@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { AuthorizationModuleOptionsToken } from './authorization.definition';
 import { AuthorizationConfig } from './types/authorizationConfig.type';
-import { ParsedPermissionSchema } from './types/parsedPermissionSchema.type';
+import { PermissionSchema } from './types/permissionSchema.type';
 
 @Injectable()
 export class AuthorizationService {
@@ -10,33 +10,33 @@ export class AuthorizationService {
     private params: AuthorizationConfig,
   ) {}
 
-  get permissions() {
-    return this.params.permissions;
+  get permissionsObject() {
+    return this.params.permissionsObject;
   }
 
-  get parsedPermissions() {
-    return Object.keys(this.params.permissions).reduce<
-      ParsedPermissionSchema[]
+  get permissionsList() {
+    return Object.keys(this.params.permissionsObject).reduce<
+      PermissionSchema[]
     >((list, resource) => {
-      const permissionList = this.params.permissions[resource];
-      const resourceActions = Object.values(permissionList).map(
-        (permissionItem) => {
-          return {
-            action: permissionItem.action,
-            description: permissionItem.description,
-            resource,
-          } as ParsedPermissionSchema;
-        },
-      );
+      const permissionList = this.params.permissionsObject[resource];
+      const resourceActions = Object.values(
+        permissionList,
+      ).map<PermissionSchema>((permissionItem) => {
+        return {
+          action: permissionItem.action,
+          description: permissionItem.description,
+          resource,
+        };
+      });
 
       return [...list, ...resourceActions];
     }, []);
   }
 
-  async syncPermissions() {
-    return this.params.onSyncPermissions?.(
-      this.parsedPermissions,
-      this.params.permissions,
+  async handlePermissions() {
+    return this.params.permissionsSyncEndpointCallback?.(
+      this.permissionsList,
+      this.permissionsObject,
     );
   }
 }

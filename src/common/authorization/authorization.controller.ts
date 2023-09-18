@@ -8,7 +8,7 @@ export class AuthorizationController {
   constructor(private readonly service: AuthorizationService) {}
 
   @Patch('/sync')
-  syncPermissions() {
-    return this.service.syncPermissions();
+  handlePermissions() {
+    return this.service.handlePermissions();
   }
 }

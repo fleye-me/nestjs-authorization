@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { AuthorizationModuleOptionsToken } from '../authorization.definition';
 import { AuthorizationConfig } from '../types/authorizationConfig.type';
-import { PERMISSIONS_SYNC_TOKEN_HEADER_KEY } from '../authorization.constants';
+import { PERMISSIONS_SYNC_ENDPOINT_SECRET_HEADER_KEY } from '../authorization.constants';
 
 @Injectable()
 export class PermissionsSyncGuard implements CanActivate {
@@ -16,10 +16,12 @@ export class PermissionsSyncGuard implements CanActivate {
   ) {}
 
   getPrivateKey() {
-    const privateKey = this.params.authorizationPrivateKey;
+    const privateKey = this.params.permissionsSyncEndpointSecretKey;
 
     if (!privateKey) {
-      throw new Error('AuthorizationPrivateKey not provided');
+      throw new Error(
+        `${PERMISSIONS_SYNC_ENDPOINT_SECRET_HEADER_KEY} not provided`,
+      );
     }
 
     return privateKey;
@@ -28,7 +30,7 @@ export class PermissionsSyncGuard implements CanActivate {
   canActivate(context: ExecutionContext): boolean {
     const privateKey = this.getPrivateKey();
     const keyFromHeader = context.switchToHttp().getRequest().headers[
-      PERMISSIONS_SYNC_TOKEN_HEADER_KEY
+      PERMISSIONS_SYNC_ENDPOINT_SECRET_HEADER_KEY
     ];
 
     if (keyFromHeader !== privateKey) {

@@ -1,0 +1,30 @@
+name: Release Version
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  version-on-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v3
+
+      - name: Configure git user
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git config --local user.password "${{ secrets.GITHUB_TOKEN }}"
+      - name: Update app version to patch
+        if: steps.major.outcome != 'success' && steps.minor.outcome != 'success'
+        run: npm version patch -m '[Package.json] bump to %s'
+
+      - name: Update branch
+        run: git push origin main
+
+      - name: Send tags
+        run: git push --tags

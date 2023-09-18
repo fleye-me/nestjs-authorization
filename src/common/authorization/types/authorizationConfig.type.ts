@@ -1,21 +1,21 @@
-import { ParsedPermissionSchema } from './parsedPermissionSchema.type';
-import { PermissionsListDef } from './permission.type';
+import { PermissionSchema } from './permissionSchema.type';
+import { PermissionsObject } from './permission.type';
 
-type SyncPermissionsFn = (
-  parsedPermissions: ParsedPermissionSchema[],
-  permissions: PermissionsListDef,
+type PermissionsSyncEndpointCallback = (
+  permissionsList: PermissionSchema[],
+  permissionsObject: PermissionsObject,
 ) => void | Promise<void>;
 
 export type AuthorizationConfigWithSync = {
-  authorizationPrivateKey: string;
-  onSyncPermissions: SyncPermissionsFn;
+  permissionsSyncEndpointSecretKey: string;
+  permissionsSyncEndpointCallback: PermissionsSyncEndpointCallback;
 };
 
 export type AuthorizationConfigWithouSync = {
-  authorizationPrivateKey?: string;
-  onSyncPermissions?: SyncPermissionsFn;
+  permissionsSyncEndpointSecretKey?: string;
+  permissionsSyncEndpointCallback?: PermissionsSyncEndpointCallback;
 };
 
 export type AuthorizationConfig = {
-  permissions: PermissionsListDef;
+  permissionsObject: PermissionsObject;
 } & (AuthorizationConfigWithSync | AuthorizationConfigWithouSync);

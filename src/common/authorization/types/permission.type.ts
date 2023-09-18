@@ -16,6 +16,6 @@ export type PermissionActionDef = {
 /**
  * @description e.g. { users: { create: ..., read: ..., ... }, other: {...}, ... }
  */
-export type PermissionsListDef = {
+export type PermissionsObject = {
   [resource: string]: PermissionActionDef;
 };

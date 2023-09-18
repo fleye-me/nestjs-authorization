@@ -14,9 +14,9 @@ import { permissions } from './permissions';
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => {
         return {
-          permissions,
-          authorizationPrivateKey: 'secret',
-          async onSyncPermissions(permissions) {
+          permissionsObject: permissions,
+          permissionsSyncEndpointSecretKey: 'secret',
+          async permissionsSyncEndpointCallback(permissions) {
             console.log('Syncing permissions...');
             console.log(`permissions ${permissions}`);
             // TODO: database sync here
