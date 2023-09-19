@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthorizationModule } from './common/authorization/authorization.module';
+import { AuthorizationModule } from './common/authorization';
 import { permissions } from './permissions';
 
 // EXAMPLE

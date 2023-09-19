@@ -2,12 +2,11 @@
   "extends": "./tsconfig.json",
   "exclude": ["node_modules", "test", "dist", "**/*spec.ts"],
   "include": [
-    "src/common/authorization",
+    "src/common/authorization/**/*",
   ],
   "compilerOptions": {
-    "lib": ["ES2019"],
     "module": "commonjs",
-    "target": "ES2019",
+    "noImplicitAny": false,
     "declaration": true,
     "removeComments": false,
     "emitDecoratorMetadata": true,

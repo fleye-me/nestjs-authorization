@@ -23,9 +23,9 @@ export class AuthorizationService {
         permissionList,
       ).map<PermissionSchema>((permissionItem) => {
         return {
-          action: permissionItem.action,
-          description: permissionItem.description,
-          resource,
+          action: permissionItem.action.trim(),
+          description: permissionItem.description.trim(),
+          resource: resource.trim(),
         };
       });
 

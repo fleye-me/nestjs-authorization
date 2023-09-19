@@ -1,9 +1,6 @@
-import { Global, Inject, Module } from '@nestjs/common';
-import { AuthorizationConfig } from './types/authorizationConfig.type';
-import {
-  AuthorizationModuleClass,
-  AuthorizationModuleOptionsToken,
-} from './authorization.definition';
+import { Global, Module } from '@nestjs/common';
+
+import { AuthorizationModuleClass } from './authorization.definition';
 import { AuthorizationService } from './authorization.service';
 import { AuthorizationController } from './authorization.controller';
 
@@ -14,11 +11,4 @@ import { AuthorizationController } from './authorization.controller';
   providers: [AuthorizationService],
   exports: [AuthorizationService],
 })
-export class AuthorizationModule extends AuthorizationModuleClass {
-  constructor(
-    @Inject(AuthorizationModuleOptionsToken)
-    private params: AuthorizationConfig,
-  ) {
-    super();
-  }
-}
+export class AuthorizationModule extends AuthorizationModuleClass {}
