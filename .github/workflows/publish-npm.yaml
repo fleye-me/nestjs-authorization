@@ -11,23 +11,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
-
       - uses: actions/setup-node@v3
         with:
           node-version: '18.x'
-          cache: 'pnpm'
+          cache: 'yarn'
           registry-url: 'https://registry.npmjs.org'
           scope: '@fleye-me'
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: yarn install --frozen-lockfile
 
       - name: Build
-        run: pnpm build:package
+        run: yarn build:package
 
-      - run: pnpm publish --no-git-checks --access public 
+      - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
